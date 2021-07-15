@@ -11,6 +11,18 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'alarm',
+    loadChildren: () => import('./alarm/alarm.module').then( m => m.AlarmPageModule)
+  },
+  {
+    path: 'kronometre',
+    loadChildren: () => import('./kronometre/kronometre.module').then( m => m.KronometrePageModule)
+  },
+  {
+    path: 'todo',
+    loadChildren: () => import('./todo/todo.module').then( m => m.TodoPageModule)
+  },
 ];
 
 @NgModule({

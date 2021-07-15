@@ -1,20 +1,64 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content padding>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+
+  <ion-card-header>
+    <ion-item color="dark">
+      <ion-label >Zamanla</ion-label>
+      <ion-datetime display-format="mm:ss" placeholder="Tıkla" [(ngModel)]="fullTime" cancelText="İptal" doneText="Tamam"></ion-datetime>
+    </ion-item>
+  </ion-card-header>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+
+    <ion-fab-button>
+      <ion-icon name="arrow-up-circle"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="top">
+      <ion-fab-button href="/alarm"><ion-icon name="alarm-outline"></ion-icon></ion-fab-button>
+     
+      <ion-fab-button href="/todo"><ion-icon name="checkmark-circle-outline"></ion-icon></ion-fab-button>
+   
+      <ion-fab-button href="/kronometre"><ion-icon name="flag-outline"></ion-icon></ion-fab-button>
+
+      <ion-fab-button href="/home"><ion-icon name="stopwatch-outline"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+
+  </ion-fab>
+
+
+  <circle-progress (click)="startTimer()"
+    [percent]="percent"
+    [maxPercent]="100"
+    [radius]="radius"
+    [showTitle]="false"
+    [showSubtitle]="false"
+    [outerStrokeWidth]="16"
+    [outerStrokeColor]="'#480ca8'"
+    [showZeroOuterStroke]="true"
+    [backgroundStrokeWidth]="5"
+    [outerStrokeGradient]="true"
+    [outerStrokeGradientStopColor]="'#b5179e'"
+    [showInnerStroke]="true"
+    [showUnits]="false"
+    [innerStrokeColor]="'#10002b'"
+    [innerStrokeWidth]="5"
+  ></circle-progress>
+
+    <p>{{ elapsed.h }}:{{ elapsed.m }}:{{ elapsed.s }}</p>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ng-container *ngIf="timer == false; else running">
+        <ion-fab-button (click)="startTimer()">
+          <ion-icon name="caret-forward-outline"></ion-icon>
+        </ion-fab-button>
+      </ng-container>
+      <ng-template #running>
+        <ion-fab-button (click)="stopTimer()">
+          <ion-icon name="square"></ion-icon>
+        </ion-fab-button>
+      </ng-template>
+    </ion-fab>
+
+ </ion-content>
